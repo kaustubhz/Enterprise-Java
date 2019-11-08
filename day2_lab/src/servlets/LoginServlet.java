@@ -18,12 +18,18 @@ import pojos.Voter;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private VotingDaoImpl dao1;
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init() throws ServletException {
 		System.out.println("In init "+Thread.currentThread());
+		try{
+			dao1=new VotingDaoImpl();
+		}catch (Exception e) {
+			throw new ServletException("Something went wrong in doInit()",e);
+		} 
 	}
 
 	/**
@@ -38,22 +44,25 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");	
-		try (PrintWriter pw=response.getWriter()){
-				VotingDaoImpl dao1=new VotingDaoImpl();
+		try (PrintWriter pw=response.getWriter()){				
 				Voter objVoter=dao1.authenticateVoter(request.getParameter("email"), request.getParameter("pass"));
 				if(objVoter!=null)
 				{
 					pw.print("<h2 align=center>Hello ");
 					pw.print(objVoter.getEmail()+"</h2>");
+					if(objVoter.getStatus().equals("YES"))
+						pw.print("<h3 align=center>You have already voted</h3>");
+					else
+						pw.print("<h3 align=center>You have not voted</h3>");
 				}
 				else
 				{
-					pw.print("Invalid login credentials");
-					Thread.sleep(5000);
-					response.sendRedirect("/day2_lab");				
+					pw.print("<h2>Invalid login credentials</h2>");
+					//Thread.sleep(5000);
+//					response.sendRedirect("/day2_lab");				
 				}
 			} catch (Exception e) {
-				throw new ServletException("Something went wrong in doget",e);
+				throw new ServletException("Something went wrong in doGet()",e);
 			} 
 	}
 
