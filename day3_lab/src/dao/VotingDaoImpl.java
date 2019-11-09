@@ -14,11 +14,10 @@ import static utils.DBUtils.*;
 public class VotingDaoImpl implements IVotingDao {
 
 	private Connection connection;
-	private PreparedStatement pst1,pst2,pst3,pst4;
-	
-	
+	private PreparedStatement pst1, pst2, pst3, pst4;
+
 	public VotingDaoImpl() throws ClassNotFoundException, SQLException {
-		
+
 		this.connection = fetchConnection();
 		this.pst1 = connection.prepareStatement("SELECT *FROM voters WHERE email=? and password=?");
 		this.pst2 = connection.prepareStatement("SELECT *FROM candidates");
@@ -30,19 +29,19 @@ public class VotingDaoImpl implements IVotingDao {
 	public Voter authenticateVoter(String em, String pass) throws Exception {
 		pst1.setString(1, em);
 		pst1.setString(2, pass);
-		try(ResultSet rst=pst1.executeQuery()){
-			if(rst.next())
-				return new Voter(rst.getInt(1),rst.getString("email"),rst.getString(3),rst.getString(4));
+		try (ResultSet rst = pst1.executeQuery()) {
+			if (rst.next())
+				return new Voter(rst.getInt(1), rst.getString("email"), rst.getString(3), rst.getString(4));
 		}
 		return null;
 	}
 
 	@Override
 	public List<Candidate> getCandidateList() throws Exception {
-		List<Candidate>candidateList=new ArrayList<>();
-		try(ResultSet rst=pst2.executeQuery()){			
-			while(rst.next())
-				candidateList.add(new Candidate(rst.getInt(1),rst.getString("name"),rst.getString(3),rst.getInt(4)));
+		List<Candidate> candidateList = new ArrayList<>();
+		try (ResultSet rst = pst2.executeQuery()) {
+			while (rst.next())
+				candidateList.add(new Candidate(rst.getInt(1), rst.getString("name"), rst.getString(3), rst.getInt(4)));
 			return candidateList;
 		}
 	}
@@ -51,12 +50,26 @@ public class VotingDaoImpl implements IVotingDao {
 	public String incVotesUpdateStatus(int candidateId, int voterId) throws Exception {
 		pst3.setInt(1, voterId);
 		pst4.setInt(1, candidateId);
-		int i=pst3.executeUpdate();
-		int j=pst4.executeUpdate();
-			if(i>0 && j>0)
-				return "Success";
-		
+		int i = pst3.executeUpdate();
+		int j = pst4.executeUpdate();
+		if (i > 0 && j > 0)
+			return "Success";
+
 		return "Fail";
+	}
+
+	@Override
+	public void cleanUp() throws Exception {
+		if (pst1 != null)
+			pst1 = null;
+		if (pst2 != null)
+			pst2 = null;
+		if (pst3 != null)
+			pst3 = null;
+		if (pst4 != null)
+			pst4 = null;
+		if (connection != null)
+			connection = null;
 	}
 
 }

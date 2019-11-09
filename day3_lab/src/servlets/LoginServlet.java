@@ -2,8 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,19 +46,25 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");	
 		try (PrintWriter pw=response.getWriter()){	
-								
+			
+			hs=request.getSession();
+				if(request.getParameter("email").equals("admin@gmail.com") && request.getParameter("pass").equals("admin"))	
+				{
+					hs.setAttribute("super","admin" );
+					response.sendRedirect("alldetails");
+				}
 				Voter objVoter=dao1.authenticateVoter(request.getParameter("email"), request.getParameter("pass"));
 				if(objVoter!=null)
 				{
-					hs=request.getSession();
+					
 					hs.setAttribute("voter",objVoter);
-//					pw.print("<h2 align=center>Hello ");
+					pw.print("<h2 align=center>Hello ");					
 					pw.print(objVoter.getEmail()+"</h2>");
 					if(objVoter.getStatus().equals("YES"))
 						pw.print("<h3 align=center>You have already voted</h3>");
 					else
 					{
-						pw.print("<h3 align=center>You have not voted</h3>");
+//						pw.print("<h3 align=center>You have not voted</h3>");
 						response.sendRedirect("candidatelist");
 					}	
 				}

@@ -33,6 +33,11 @@ public class LogoutServlet extends HttpServlet {
 	
 	public void destroy() {
 		System.out.println("In logout destroy "+Thread.currentThread());
+		try {
+			dao.cleanUp();
+		} catch (Exception e) {
+			e.printStackTrace();
+			}
 	}
 
 	
