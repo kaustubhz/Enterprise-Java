@@ -1,7 +1,7 @@
 package pojos;
 import javax.persistence.*;
 @Entity
-@Table(name="new_candidates")
+@Table(name="candidates")
 public class Candidate {
 	private Integer id;
 	private String name,party;

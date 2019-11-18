@@ -10,6 +10,10 @@ import pojos.Candidate;
 
 public class CandidateDaoImpl implements ICandidateDao {
 
+	public CandidateDaoImpl() {
+		System.out.println("Inside "+getClass().getName());
+	}
+
 	@Override
 	public List<Candidate> getCandidateList() {
 		String jpql = "select c from Candidate c";

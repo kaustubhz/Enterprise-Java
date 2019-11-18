@@ -8,6 +8,7 @@ import pojos.Candidate;
 
 public class CandidateBean {
 
+	private Integer candidateId;
 	private List<Candidate> candidates;
 
 	private CandidateDaoImpl dao;
@@ -23,5 +24,16 @@ public class CandidateBean {
 		return dao.getCandidateList();
 	}
  
+	public Integer getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(Integer candidateId) {
+		this.candidateId = candidateId;
+	}
+
+	public String updateVotes() {
+		return dao.incrementVotes(candidateId);
+	}
 
 }

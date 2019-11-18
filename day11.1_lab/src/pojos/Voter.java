@@ -1,16 +1,16 @@
 package pojos;
 import javax.persistence.*;
 @Entity
-@Table(name="new_voters")
+@Table(name="voters")
 public class Voter {
 	private Integer id;
 	private String email,pass;
-	private boolean status;
+	private String status;
 	private String role;
 	public Voter() {
 		System.out.println("in voter constr");
 	}
-	public Voter(Integer id, String email, String pass, boolean status) {
+	public Voter(Integer id, String email, String pass, String status) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -39,10 +39,11 @@ public class Voter {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public boolean getStatus() {
+	@Column(name="status",length=10)
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	@Column(length = 20)
@@ -57,6 +58,10 @@ public class Voter {
 		return "Voter [id=" + id + ", email=" + email + ", status=" + status + "]";
 	}
 	
+	public boolean statusIsVoted()
+	{
+		return status.equals("YES");
+	}
 	
 
 }

@@ -15,6 +15,8 @@
 			<input type="radio" name="radbtn" value="${c.id}">${c.name}&nbsp;&nbsp;&nbsp;${c.party}</input>
 			<br />
 		</c:forEach>
+		<br/>
+		<input type="submit" value="Cast your vote" />
 	</form>
 </body>
 </html>

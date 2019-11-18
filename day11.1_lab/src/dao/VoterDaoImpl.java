@@ -6,6 +6,10 @@ import static utils.HibernateUtils.*;
 
 public class VoterDaoImpl implements IVoterDao {
 
+	public VoterDaoImpl() {
+		System.out.println("Inside "+getClass().getName());
+	}
+
 	@Override
 	public Voter authenticateVoter(String em1, String pass1) {
 		String jpql = "select v from Voter v where v.email=:em and v.pass=:pa";
@@ -34,14 +38,14 @@ public class VoterDaoImpl implements IVoterDao {
 			//detached--->persistent (update)
 			//v --detached
 			hs.update(v);//v --persistent
-			v.setStatus(true);
+			v.setStatus("YES");;
 			tx.commit();
 		} catch (RuntimeException e) {
 			if (tx != null)
 				tx.rollback();
 			throw e;
 		}
-		return "Updated voting status";
+		return "Updated";
 	}
 
 }
