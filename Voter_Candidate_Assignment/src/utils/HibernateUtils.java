@@ -17,7 +17,7 @@ public class HibernateUtils {
 			// build session factory from Metadata
 			sessionFactory = new MetadataSources(reg).
 					buildMetadata().buildSessionFactory();
-			System.out.println("sf created....");
+			System.out.println("SessionFactory created....");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
