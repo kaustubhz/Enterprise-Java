@@ -3,7 +3,7 @@ package pojos;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "new_candidate")
+@Table(name = "candidate")
 public class Candidate extends AbstractEntity {
 	
 	@Column(name = "candidate_name", length = 20)

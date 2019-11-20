@@ -38,16 +38,15 @@ public class VoterBean {
 		this.message = message;
 	}
 
-	public String validateVoter(String email,String pass)
+	public String validateVoter()
 	{
 		System.out.println("\n Validating voter details from "+getClass().getName());
 		try {
 			voterDetails=dao.authenticateVoter(email, pass);
-			if(voterDetails.getVoterStatus().equals("YES"))
-				{
-				message="You already voted";
-				return "status";
-				}
+			/*
+			 * if(voterDetails.getVoterStatus().equals("YES")) {
+			 * message="You already voted"; return "status"; }
+			 */
 			message="Login Successful";
 			return "candidatelist";
 		}
