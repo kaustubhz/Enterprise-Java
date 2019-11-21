@@ -11,8 +11,16 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="dept_id")
-	private Integer deptId;
+	private Integer deptartmentId;
 	
+	public Integer getDeptartmentId() {
+		return deptartmentId;
+	}
+
+	public void setDeptartmentId(Integer deptartmentId) {
+		this.deptartmentId = deptartmentId;
+	}
+
 	@Column(name = "dept_name",length = 20,unique = true)
 	private String departName;
 	
@@ -32,13 +40,6 @@ public class Department {
 		this.departLocation = departLocation;
 	}
 
-	public Integer getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
-	}
 
 	public String getDepartName() {
 		return departName;
@@ -58,7 +59,7 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [ ID=" + deptId + ", Name=" + departName + ", Location=" + departLocation
+		return "Department [ ID=" + deptartmentId + ", Name=" + departName + ", Location=" + departLocation
 				+ "]";
 	}
 	

@@ -20,6 +20,7 @@ public class DepartmentController {
 	{
 		System.out.println("Inside showAllDepartments of "+getClass().getName());
 		map.addAttribute("deptlist", dao.listAllDepartments());
+		System.out.println("Map value:" +map);
 		return "/dept/list";
 	}
 }

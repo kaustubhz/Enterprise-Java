@@ -1,35 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Register Employee Form</title>
 </head>
 <body>
-	<h2 align="center">Hire employee</h2>
-	<form  method="POST">
-		<table align="center" cellspacing=2>
+	<sp:form method="post" modelAttribute="employee">
+		<table>
 			<tr>
-				<th><label for="empName"> Employee name </label></th>
-				<td><input id="ename" type="text" name="empName" /></td>
+				<td>Enter Employee Name</td>
+				<td><sp:input path="empName" /></td>
 			</tr>
 			<tr>
-				<th><label for="empEmail"> email </label></th>
-				<td><input id="email" type="email" name="empEmail" /></td>
+				<td>Enter Employee Email</td>
+				<td><sp:input path="empEmail" /></td>
 			</tr>
 			<tr>
-				<th><label for="empSalary">Salary </label></th>
-				<td><input id="salary" type="number" name="empSalary" /></td>
+				<td>Enter Salary</td>
+				<td><sp:input type="number" path="empSalary" /></td>
 			</tr>
 			<tr>
-				<th><label for="empDOB">DOB </label></th>
-				<td><input id="dob" type="date" name="empDOB" /></td>
+				<td>Enter Date</td>
+				<td><sp:input type="date" path="empDOB" /></td>
 			</tr>
-			<tr>
-				<td><input  type="submit" value="Submit" /></td>
-				<td><input  type="reset" name="Reset" /></td>
-			</tr>
-	</form>
+		</table>
+		<br>
+		<input type="submit" value="Hire Employee" />
+	</sp:form>
+
 </body>
 </html>

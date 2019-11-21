@@ -10,7 +10,7 @@
 </head>
 <body>
 <c:forEach var="dept" items="${requestScope.deptlist}">
-	<p align="center"><a href="<sp:url value='/emp/register?deptId=${dept.deptId}' />">${dept.departName}</a></p>
+	<p align="center"><a href="<sp:url value='/emp/register?deptartmentId=${dept.deptartmentId}' />">${dept.departName}</a></p>
 </c:forEach>
 </body>
 </html>

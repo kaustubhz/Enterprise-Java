@@ -3,6 +3,8 @@ package com.app.pojos;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name="my_employee")
 public class Employee {
@@ -22,6 +24,7 @@ public class Employee {
 	private double empSalary;
 	
 	@Column(name="emp_dob")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate empDOB;
 	
 	@ManyToOne
