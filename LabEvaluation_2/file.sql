@@ -1,0 +1,1 @@
+insert into course(course_name,course_price) VALUES("JAVA",2100),(".NET",1500),("Angular",3000);
